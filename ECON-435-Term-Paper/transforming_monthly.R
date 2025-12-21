@@ -24,4 +24,4 @@ column_names <- c(
 log_diff_data_new_names <- set_names(log_diff_data, column_names)
 
 write_csv(log_diff_data_new_names,
-          "data/intermediate/ld_transport_monthly.csv")
+          "data/processed/ld_transport_monthly.csv")
