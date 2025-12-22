@@ -68,10 +68,13 @@ key_vars_qtr <- key_vars |> group_by(qtr) |> summarise(
   )
 )
 
+covid_start <- as.yearqtr("2020 Q1")
+covid_end <- as.yearqtr("2023 Q2")
+
 combined <- key_vars_qtr |> left_join(real_GDP, join_by(qtr == qtr))
 combined$covid <-
-  ifelse(combined$qtr >= as.yearqtr("2020 Q1") &
-           combined$qtr <= as.yearqtr("2023 Q2"),
+  ifelse(combined$qtr >= covid_start &
+           combined$qtr <= covid_end,
          1,
          0)
 
