@@ -6,7 +6,7 @@ inter_data <-
 log_diff_data <-
   inter_data |> mutate(across(!c(qtr, covid), ~ c(NA, diff(log(
     .x
-  ))))) |> slice_tail(n = -1) |> slice_head(n = -1)
+  ))))) |> slice_tail(n = -1) |> slice_head(n = -2)
 
 column_names <- c(
   "Qtr",

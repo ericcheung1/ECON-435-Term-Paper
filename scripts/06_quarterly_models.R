@@ -1,4 +1,6 @@
 library(tidyverse)
+library(sandwich)
+library(lmtest)
 
 df <- read_csv("data/processed/ld_transport_quarterly.csv")
 
@@ -22,6 +24,19 @@ mod3 <-
     data = df
   )
 
-saveRDS(mod1, "models/qtrly_mod1.rds")
-saveRDS(mod2, "models/qtrly_mod2.rds")
-saveRDS(mod3, "models/qtrly_mod3.rds")
+# saveRDS(mod1, "models/qtrly_mod1.rds")
+# saveRDS(mod2, "models/qtrly_mod2.rds")
+# saveRDS(mod3, "models/qtrly_mod3.rds")
+
+RobSE_mod1 <-
+  coeftest(mod1, vcov. = NeweyWest(mod1, lag = 4, adjust = TRUE))
+
+RobSE_mod2 <-
+  coeftest(mod2, vcov. = NeweyWest(mod2, lag = 4, adjust = TRUE))
+
+RobSE_mod3 <-
+  coeftest(mod3, vcov. = NeweyWest(mod3, lag = 4, adjust = TRUE))
+
+# saveRDS(RobSE_mod1, "models/qtrly_mod1_robust.rds")
+# saveRDS(RobSE_mod2, "models/qtrly_mod2_robust.rds")
+# saveRDS(RobSE_mod3, "models/qtrly_mod3_robust.rds")
