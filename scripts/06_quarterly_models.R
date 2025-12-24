@@ -24,6 +24,7 @@ mod3 <-
     data = df
   )
 
+# uncomment to save to directory
 # saveRDS(mod1, "models/qtrly_mod1.rds")
 # saveRDS(mod2, "models/qtrly_mod2.rds")
 # saveRDS(mod3, "models/qtrly_mod3.rds")
@@ -37,6 +38,7 @@ RobSE_mod2 <-
 RobSE_mod3 <-
   coeftest(mod3, vcov. = NeweyWest(mod3, lag = 4, adjust = TRUE))
 
-# saveRDS(RobSE_mod1, "models/qtrly_mod1_robust.rds")
-# saveRDS(RobSE_mod2, "models/qtrly_mod2_robust.rds")
-# saveRDS(RobSE_mod3, "models/qtrly_mod3_robust.rds")
+# uncomment to save to directory
+# saveRDS(RobSE_mod1, "models/qtrly_mod_robust1.rds")
+# saveRDS(RobSE_mod2, "models/qtrly_mod_robust2.rds")
+# saveRDS(RobSE_mod3, "models/qtrly_mod_robust3.rds")
