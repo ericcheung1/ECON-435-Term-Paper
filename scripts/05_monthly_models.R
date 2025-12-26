@@ -27,14 +27,14 @@ mod3 <-
 # saveRDS(mod2, "models/monthly_mod2.rds")
 # saveRDS(mod3, "models/monthly_mod3.rds")
 
-RobSE_mod1 <-
+Robust_SE_mod1 <-
   coeftest(mod1, vcov. = NeweyWest(mod1, lag = 4, adjust = TRUE))
-RobSE_mod2 <-
+Robust_SE_mod2 <-
   coeftest(mod2, vcov. = NeweyWest(mod2, lag = 4, adjust = TRUE))
-RobSE_mod3 <-
+Robust_SE_mod3 <-
   coeftest(mod3, vcov. = NeweyWest(mod3, lag = 4, adjust = TRUE))
 
 # uncomment to save to directory
-# saveRDS(RobSE_mod1, "models/monthly_mod_robust1.rds")
-# saveRDS(RobSE_mod2, "models/monthly_mod_robust2.rds")
-# saveRDS(RobSE_mod3, "models/monthly_mod_robust3.rds")
+# saveRDS(Robust_SE_mod1, "models/monthly_mod_robust1.rds")
+# saveRDS(Robust_SE_mod2, "models/monthly_mod_robust2.rds")
+# saveRDS(Robust_SE_mod3, "models/monthly_mod_robust3.rds")

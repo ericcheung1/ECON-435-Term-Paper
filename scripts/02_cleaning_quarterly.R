@@ -7,7 +7,7 @@ raw_data$Date <- as_datetime(raw_data$Date)
 
 # 2, 41, 42, 47, 9, 10, 11, 92, 100, 97
 
-key_vars <- raw_data |> select(
+main_variables <- raw_data |> select(
   "Date",
   "State and Local Government Construction Spending - Mass Transit",
   "State and Local Government Construction Spending - Land Passenger Terminal",
@@ -20,19 +20,19 @@ key_vars <- raw_data |> select(
   "Unemployment Rate - Seasonally Adjusted"
 ) |> filter(Date > "2004-12-01") |> slice_head(n = -3)
 
-key_vars$`Unemployment Rate - Seasonally Adjusted` <-
-  as.numeric(sub("%", "", key_vars$`Unemployment Rate - Seasonally Adjusted`)) / 100
+main_variables$`Unemployment Rate - Seasonally Adjusted` <-
+  as.numeric(sub("%", "", main_variables$`Unemployment Rate - Seasonally Adjusted`)) / 100
 
-key_vars$`Real Gross Domestic Product - Seasonally Adjusted` <-
+main_variables$`Real Gross Domestic Product - Seasonally Adjusted` <-
   as.numeric(gsub(
     "[$,]",
     "",
-    key_vars$`Real Gross Domestic Product - Seasonally Adjusted`
+    main_variables$`Real Gross Domestic Product - Seasonally Adjusted`
   ))
 
-key_vars$qtr <- as.yearqtr(key_vars$Date)
+main_variables$qtr <- as.yearqtr(main_variables$Date)
 
-real_GDP <- key_vars |> select("Date",
+real_GDP <- main_variables |> select("Date",
                                "Real Gross Domestic Product - Seasonally Adjusted")
 
 real_GDP$qtr <- as.yearqtr(real_GDP$Date)
@@ -41,7 +41,7 @@ real_GDP <-
   real_GDP |> select(qtr, rgdp = `Real Gross Domestic Product - Seasonally Adjusted`) |>
   filter(!is.na(rgdp))
 
-key_vars_qtr <- key_vars |> group_by(qtr) |> summarise(
+main_variables_qtr <- main_variables |> group_by(qtr) |> summarise(
   MassTransit_qtr = sum(
     `State and Local Government Construction Spending - Mass Transit`,
     na.rm = TRUE
@@ -71,7 +71,7 @@ key_vars_qtr <- key_vars |> group_by(qtr) |> summarise(
 covid_start <- as.yearqtr("2020 Q1")
 covid_end <- as.yearqtr("2023 Q2")
 
-combined <- key_vars_qtr |> left_join(real_GDP, join_by(qtr == qtr))
+combined <- main_variables_qtr |> left_join(real_GDP, join_by(qtr == qtr))
 combined$covid <-
   ifelse(combined$qtr >= covid_start &
            combined$qtr <= covid_end,

@@ -1,16 +1,16 @@
 library(tidyverse)
 library(tseries)
 
-pre_ld_monthly <-
+monthly_data <-
   read_csv("data/intermediate/transport_data_intermediate.csv") |>
   select(-c("Date", "covid"))
-pre_ld_qtrly <-
+qtrly_data <-
   read_csv("data/intermediate/transport_data_inter_qtr.csv") |>
   select(-c("qtr", "covid"))
-ld_monthly <-
+log_diff_monthly_data <-
   read_csv("data/processed/ld_transport_monthly.csv") |>
   select(-c("Date", "covid"))
-ld_qtrly <-
+log_diff_qtrly_data <-
   read_csv("data/processed/ld_transport_quarterly.csv") |>
   select(-c("Qtr", "covid"))
 
@@ -28,16 +28,16 @@ adf_test <- function(df) {
   return(result_list)
 }
 
-adf_pldm <- adf_test(pre_ld_monthly)
-adf_pldq <- adf_test(drop_na(pre_ld_qtrly))
-adf_ldm <- adf_test(ld_monthly)
-adf_ldq <- adf_test(ld_qtrly)
+adf_results_monthly_data <- adf_test(monthly_data)
+adf_results_qtrly_data <- adf_test(drop_na(qtrly_data))
+adf_results_log_diff_montly_data <- adf_test(log_diff_monthly_data)
+adf_results_log_diff_qtrly_data <- adf_test(log_diff_qtrly_data)
 
 adf_tests <- list(
-  "pre_ld_monthly" = adf_pldm,
-  "pre_ld_qtrly" = adf_pldq,
-  "ld_monthly" = adf_ldm,
-  "ld_qtrly" = adf_ldq
+  "monthly_data" = adf_results_monthly_data,
+  "qtrly_data" = adf_results_qtrly_data,
+  "log_diff_monthly_data" = adf_results_log_diff_montly_data,
+  "log_diff_qtrly_data" = adf_results_log_diff_qtrly_data
 )
 
-saveRDS(adf_tests, "stat_tests/adf_tests.rds")
+# saveRDS(adf_tests, "stat_tests/adf_tests.rds")
