@@ -1,0 +1,119 @@
+---
+title: "Statistical Test Results"
+format: pdf
+editor: visual
+---
+
+```{r, echo=FALSE}
+library(knitr)
+```
+
+```{r, echo=FALSE}
+print_graphs <- function(path) {
+  plot_files <- list.files(path = path,
+                           pattern = "\\.png$",
+                           full.names = TRUE)
+  include_graphics(plot_files)
+}
+
+print_adf_table <- function(adf_results) {
+  df <- data.frame(
+    "ADF_Statistic" = sapply(adf_results, function(x)
+      x$statistic),
+    "P_Value" = sapply(adf_results, function(x)
+      x$p.value)
+  )
+  print(df)
+}
+
+print_bp_table <- function(bp_results) {
+  df <- data.frame(
+    "BP_Statistic" = sapply(bp_results, function(x) x$statistic),
+    "P_Value" = sapply(bp_results, function(x) x$p.value)
+  )
+  print(df)
+}
+```
+
+## Stationarity Plots
+
+### Monthly Variable Plots
+
+```{r, echo=FALSE}
+monthly_graphs_dir <- file.path("..", "graphs", "monthly")
+print_graphs(monthly_graphs_dir)
+```
+
+### Quarterly Variable Plots
+
+```{r, echo=FALSE}
+qtrly_graphs_dir <- file.path("..", "graphs", "qtrly")
+print_graphs(qtrly_graphs_dir)
+```
+
+### Log-Diff Monthly Variable Plots
+
+```{r, echo=FALSE}
+log_diff_monthly_dir <- file.path("..", "graphs", "log_diff_monthly")
+print_graphs(log_diff_monthly_dir)
+```
+
+### Log-Diff Quarterly Variable Plots
+
+```{r, echo=FALSE}
+log_diff_qtrly_dir <- file.path("..", "graphs", "log_diff_qtrly")
+print_graphs(log_diff_qtrly_dir)
+```
+
+## ADF Test for Stationarity
+
+```{r, echo=FALSE}
+adf_test_results <- readRDS("../stat_tests/adf_tests.rds")
+adf_log_diff_monthly <- adf_test_results$ld_monthly
+```
+
+### ADF Test Result for Monthly Variables
+
+```{r, echo=FALSE}
+adf_results_monthly <- adf_test_results$pre_ld_monthly
+# names(adf_results_monthly) <- name
+# 
+# clean_name <- function(x) {
+#   parts <- strsplit(x, "-")[[1]]
+#   middle <- trimws(parts[2])      # take the part between the first and second dash
+#   gsub(" ", "", middle)           # remove spaces
+# }
+# 
+# new_names <- sapply(names(adf_results_monthly), clean_name)
+# names(adf_results_monthly) <- new_names
+
+print_adf_table(adf_results_monthly)
+```
+
+### ADF Test Result for Quarterly Variables
+
+```{r, echo=FALSE}
+adf_results_qtrly <- adf_test_results$pre_ld_qtrly
+print_adf_table(adf_results_qtrly)
+```
+
+### ADF Test Result for Log-Diff Monthly Variables
+
+```{r, echo=FALSE}
+adf_results_log_diff_monthly <- adf_test_results$ld_monthly
+print_adf_table(adf_results_log_diff_monthly)
+```
+
+### ADF Test Result for Log-Diff Quarterly Variables
+
+```{r, echo=FALSE}
+adf_results_log_diff_qrtly <- adf_test_results$ld_qtrly
+print_adf_table(adf_results_log_diff_qrtly)
+```
+
+### BP Test for Heteroskedasticity
+
+```{r, echo=FALSE}
+bp_test_results <- readRDS("../stat_tests/bp_tests.rds")
+print_bp_table(bp_test_results)
+```
