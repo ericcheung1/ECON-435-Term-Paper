@@ -28,10 +28,18 @@ print_adf_table <- function(adf_results) {
 
 print_bp_table <- function(bp_results) {
   df <- data.frame(
-    "BP_Statistic" = sapply(bp_results, function(x) x$statistic),
-    "P_Value" = sapply(bp_results, function(x) x$p.value)
+    "BP_Statistic" = sapply(bp_results, function(x)
+      x$statistic),
+    "P_Value" = sapply(bp_results, function(x)
+      x$p.value)
   )
   print(df)
+}
+
+clean_name <- function(x) {
+  parts <- strsplit(x, "-")[[1]]
+  middle <- trimws(parts[2])
+  gsub(" ", "", middle)
 }
 ```
 
@@ -76,16 +84,9 @@ adf_log_diff_monthly <- adf_test_results$ld_monthly
 
 ```{r, echo=FALSE}
 adf_results_monthly <- adf_test_results$pre_ld_monthly
-# names(adf_results_monthly) <- name
-# 
-# clean_name <- function(x) {
-#   parts <- strsplit(x, "-")[[1]]
-#   middle <- trimws(parts[2])      # take the part between the first and second dash
-#   gsub(" ", "", middle)           # remove spaces
-# }
-# 
-# new_names <- sapply(names(adf_results_monthly), clean_name)
-# names(adf_results_monthly) <- new_names
+
+new_names <- sapply(names(adf_results_monthly), clean_name)
+names(adf_results_monthly) <- new_names
 
 print_adf_table(adf_results_monthly)
 ```
@@ -111,7 +112,7 @@ adf_results_log_diff_qrtly <- adf_test_results$ld_qtrly
 print_adf_table(adf_results_log_diff_qrtly)
 ```
 
-### BP Test for Heteroskedasticity
+## BP Test for Heteroskedasticity
 
 ```{r, echo=FALSE}
 bp_test_results <- readRDS("../stat_tests/bp_tests.rds")
