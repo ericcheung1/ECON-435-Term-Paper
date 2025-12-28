@@ -1,0 +1,99 @@
+---
+title: Static Time-Series Regression Results
+format: pdf
+editor: visual
+---
+
+```{r, echo=FALSE}
+print_model <- function(model_name, model_number) {
+  m <-
+    readRDS(file.path("..", "models", paste0(model_name, model_number, ".rds")))
+  return(summary(m))
+}
+
+print_robust_model <- function(model_name, model_number) {
+  m <-
+    readRDS(file.path("..", "models", paste0(model_name, model_number, ".rds")))
+  return(m[, ])
+}
+```
+
+# Non-Heteroskedasticity Corrected Monthly Models
+
+## Model 1
+
+```{r, echo=FALSE}
+print_model("monthly_mod", "1")
+```
+
+## Model 2
+
+```{r,echo=FALSE}
+print_model("monthly_mod", "2")
+```
+
+## Model 3
+
+```{r, echo=FALSE}
+print_model("monthly_mod", "3")
+```
+
+# Heteroskedastascity Corrected SE Monthly Models
+
+## Model 1
+
+```{r, echo=FALSE}
+print_robust_model("monthly_mod_robust", "1")
+```
+
+## Model 2
+
+```{r, echo=FALSE}
+print_robust_model("monthly_mod_robust", "2")
+```
+
+## Model 3
+
+```{r, echo=FALSE}
+print_robust_model("monthly_mod_robust", "3")
+```
+
+# Non-Heteroskedasticity Corrected Quarterly Models
+
+## Model 1
+
+```{r, echo=FALSE}
+print_model("qtrly_mod", "1")
+```
+
+## Model 2
+
+```{r, echo=FALSE}
+print_model("qtrly_mod", "2")
+```
+
+## Model 3
+
+```{r, echo=FALSE}
+print_model("qtrly_mod", "3")
+```
+
+# Heteroskedastascity Corrected SE Quarterly Models
+
+## Model 1
+
+```{r, echo=FALSE}
+print_robust_model("qtrly_mod_robust", "1")
+```
+
+## Model 2
+
+```{r, echo=FALSE}
+print_robust_model("qtrly_mod_robust", "2")
+```
+
+## Model 3
+
+```{r, echo=FALSE}
+print_robust_model("qtrly_mod_robust", "3")
+```
