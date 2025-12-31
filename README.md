@@ -1,6 +1,6 @@
 # Econometrics Analysis: Effects of Transit Spending on Unemployment
 
-This repository contains my econometric project for ECON 435: Econometrics Methods at Simon Fraser University, where I analyze how transit infrastructure spending affects the unemployment rate in the United States. The project uses static time series regression to evaluate whether changes in public transit investment are associated with labor market outcomes.
+This repository contains the code to my econometrics term paper which I wrote for ECON 435: Econometrics Methods at Simon Fraser University, where I analyzed how transit infrastructure spending affects unemployment rate in the United States.
 
 # Methods/Techniques
 
@@ -8,11 +8,11 @@ The project uses:
 
 -   Static time series regression
 
--   Augmented Dickey--Fuller tests for stationarity
+-   Augmented Dickey-Fuller tests for stationarity
 
--   Breusch--Pagan tests for heteroskedasticity
+-   Breusch-Pagan tests for heteroskedasticity
 
--   tidyverse packages for data manipulation and visualization
+-   Tidyverse packages for data manipulation and visualization
 
 # Reproducibility 
 
