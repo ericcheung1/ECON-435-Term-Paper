@@ -1,8 +1,8 @@
-### Econometric Analysis: Transit Infrastructure Spending and U.S. Unemployment
+## Econometric Analysis: Transit Infrastructure Spending and U.S. Unemployment
 
-This repository contains the R code used for my ECON 435: Econometric Methods term paper at Simon Fraser University. The project investigates how public transit infrastructure spending relates to changes in the U.S. unemployment rate, using time‑series econometric techniques.
+This repository contains R code used for my term paper written for ECON 435: Econometrics Methods (<https://www.sfu.ca/outlines.html?2025/fall/econ/435/d100>) at Simon Fraser University. The paper investigates how public transit infrastructure spending relates to changes in the U.S. unemployment rate, using time‑series econometric techniques.
 
-### Methods and Tools
+## Methods and Tools
 
 The analysis incorporates:
 
@@ -14,7 +14,7 @@ The analysis incorporates:
 
 -   The tidyverse ecosystem for data wrangling and visualization
 
-### Project Structure
+## Project Structure
 
 -   All empirical results in the paper come from RDS objects and PNG figures produced by the scripts in `scripts/`.
 
@@ -30,6 +30,6 @@ The analysis incorporates:
 
 -   Statistical test objects generated from scripts are located in the `stats_tests/` directory and saved in the `.rds` format.
 
-### Reproducibility
+## Reproducibility
 
 All empirical results in the paper are generated from RDS objects and PNG figures produced by the scripts in the `scripts/` directory. To reproduce the workflow, run the R scripts in sequence to clean and transform the data, estimate models, conduct diagnostic tests, and generate visualizations.
